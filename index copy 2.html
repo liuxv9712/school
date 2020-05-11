@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>USST-公共场所人流状态分布</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .html {
+      font-size: 12px;
+    }
+
+    .peopleflow {
+      background: url(images/background.png);
+      background-size: 100% 100%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .peopleflow-tab-box {
+      margin: 25vh 15px 15px 15px;
+      background: #ffffff;
+      border-radius: 5px;
+    }
+
+    .peopleflow-tab-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      text-align: center;
+      cursor: pointer;
+      background: #F2F2F2;
+      border-radius: 3px 3px 0 0;
+      position: relative;
+    }
+
+    .peopleflow-tab-title {
+      padding: 10px;
+      font-size: 1rem;
+      color: #7A7A7A;
+      flex: 0 0 20%;
+    }
+
+    .peopleflow-tab-title.current {
+      background: #ffffff;
+      color: #0A9464;
+      border-radius: 3px 3px 0 0;
+      transform: scaleY(1.2);
+      font-size: 1.024rem;
+      transition: all 0.3s ease-in;
+    }
+
+    .peopleflow-tab-bottom {
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .peopleflow-tab-content {
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      border-radius: 4px;
+      margin: 0 auto;
+    }
+
+    .peopleflow-tab-content.active {
+      display: flex;
+    }
+
+
+    .peopleflow-tab-subtitle {
+      display: flex;
+      justify-content: space-between;
+      line-height: 50px;
+      height: 50px;
+    }
+
+    .peopleflow-tab-subtitle h2 {
+      font-size: 1rem;
+    }
+
+    .peopleflow-tab-subtitle p {
+      font-size: 1rem;
+      color: #A3A3A3;
+    }
+
+    .peopleflow-tab-dataBox {
+      display: flex;
+      justify-content: space-between;
+      background: #F7F6F8;
+      border-radius: 5px;
+      box-shadow: 0 8px 10px rgba(49, 70, 89, .08);
+      margin-bottom: 20px;
+    }
+
+    .peopleflow-tab-dataBox-desc {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .peopleflow-data {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #282828;
+    }
+
+    .peopleflow-tab-dataBox-desc p {
+      font-size: 0.875rem;
+      font-weight: 550;
+      color: #B2B2B2;
+    }
+
+
+    .peopleflow-tab-dataBox-footer img {
+      width: 100%;
+    }
+
+    .peopleflow-tab-dataBox-name {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 0.875rem;
+      padding: 15px 10px;
+      background: linear-gradient(135deg, #26C98D 40%, #3F96A1);
+    }
+
+    .peopleflow-tab-dataBox-name img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .peopleflow-tab-dataBox-name p {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="peopleflow">
+    <div class="peopleflow-tab-box">
+      <ul class="peopleflow-tab-top">
+        <li class="peopleflow-tab-title current">图书馆</li>
+        <li class="peopleflow-tab-title">浴室</li>
+        <li class="peopleflow-tab-title">食堂</li>
+        <li class="peopleflow-tab-title">教室</li>
+        <li class="peopleflow-tab-title">体育馆</li>
+      </ul>
+
+      <div class="peopleflow-tab-bottom">
+        <div class="peopleflow-tab-content active">
+          <div class="peopleflow-tab-subtitle">
+            <h2>图书馆当前人数态势</h2>
+            <p>2020/05/06 21:07:55</p>
+          </div>
+          <div class="peopleflow-tab-dataBox">
+            <div class="peopleflow-tab-dataBox-name">
+              <img src="images/libraryIcon.png" alt="">
+              <p>本部图书馆</p>
+            </div>
+            <div class="peopleflow-tab-dataBox-desc">
+              <span class="peopleflow-data">534</span>
+              <p>当前人数</p>
+            </div>
+          </div>
+          <div class="peopleflow-tab-dataBox">
+            <div class="peopleflow-tab-dataBox-name">
+              <img src="images/libraryIcon.png" alt="">
+              <span>分部图书馆</span>
+            </div>
+            <div class="peopleflow-tab-dataBox-desc">
+              <span class="peopleflow-data">534</span>
+              <p>当前人数</p>
+            </div>
+            <div>图图图图图图图</div>
+          </div>
+          <div class="peopleflow-tab-dataBox-footer">
+            <img src="images/libraryFooter.png" alt="">
+          </div>
+        </div>
+        <div class="peopleflow-tab-content">
+          <div class="peopleflow-tab-subtitle">
+            <h2>浴室当前人数态势</h2>
+            <p>2020/05/06 21:07:55</p>
+          </div>
+          <div class="peopleflow-tab-dataBox">
+            <div class="peopleflow-tab-dataBox-name">
+              <img src="images/bathroomIcon.png" alt="">
+              <span>本部图书馆</span>
+            </div>
+            <div class="peopleflow-tab-dataBox-desc">
+              <span class="peopleflow-data">534</span>
+              <p>当前人数</p>
+            </div>
+            <div>图图图图图图图</div>
+          </div>
+          <div class="peopleflow-tab-dataBox-footer">
+            <img src="images/bathroomFooter.png" alt="">
+          </div>
+        </div>
+        <div class="peopleflow-tab-content">
+          <div class="peopleflow-tab-subtitle">
+            <h2>食堂当前人数态势</h2>
+            <p>2020/05/06 21:07:55</p>
+          </div>
+          <div class="peopleflow-tab-dataBox">
+            <div class="peopleflow-tab-dataBox-name">
+              <img src="images/canteenIcon.png" alt="">
+              <span>本部图书馆</span>
+            </div>
+            <div class="peopleflow-tab-dataBox-desc">
+              <span class="peopleflow-data">534</span>
+              <p>当前人数</p>
+            </div>
+            <div>图图图图图图图</div>
+          </div>
+          <div class="peopleflow-tab-dataBox-footer">
+            <img src="images/canteenFooter.png" alt="">
+          </div>
+        </div>
+        <div class="peopleflow-tab-content">
+          <div class="peopleflow-tab-subtitle">
+            <h2>教室当前人数态势</h2>
+            <p>2020/05/06 21:07:55</p>
+          </div>
+          <div class="peopleflow-tab-dataBox">
+            <div class="peopleflow-tab-dataBox-name">
+              <img src="images/classroomIcon.png" alt="">
+              <span>本部图书馆</span>
+            </div>
+            <div class="peopleflow-tab-dataBox-desc">
+              <span class="peopleflow-data">534</span>
+              <p>当前人数</p>
+            </div>
+            <div>图图图图图图图</div>
+          </div>
+          <div class="peopleflow-tab-dataBox-footer">
+            <img src="images/classroomFooter.png" alt="">
+          </div>
+        </div>
+        <div class="peopleflow-tab-content">
+          <div class="peopleflow-tab-subtitle">
+            <h2>体育馆当前人数态势</h2>
+            <p>2020/05/06 21:07:55</p>
+          </div>
+          <div class="peopleflow-tab-dataBox">
+            <div class="peopleflow-tab-dataBox-name">
+              <img src="images/gymIcon.png" alt="">
+              <span>本部图书馆</span>
+            </div>
+            <div class="peopleflow-tab-dataBox-desc">
+              <span class="peopleflow-data">534</span>
+              <p>当前人数</p>
+            </div>
+            <div>图图图图图图图</div>
+          </div>
+          <div class="peopleflow-tab-dataBox-footer">
+            <img src="images/gymFooter.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
+  <script>
+    $('.peopleflow-tab-title').on('click', function () {
+      if (!$(this).hasClass('current')) {
+
+        $('.peopleflow-tab-content.active').removeClass('active');
+        $($('.peopleflow-tab-content')[$(this).index()]).addClass('active');
+
+        $(this).addClass('current');
+        $(this).siblings().removeClass('current');
+      }
+    });
+    // ant f2
+    $.getScript('https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js', function () {
+      // var fontSize = 14 * (window.innerWidth / 375); // 字体适配不同屏幕
+
+      // var data = [{
+      //   x: '1',
+      //   y: 85
+      // }];
+      // var chart = new F2.Chart({
+      //   id: 'mountNode',
+      //   pixelRatio: window.devicePixelRatio,
+      //   padding: [12, 12, 12, 12],
+      //   appendPadding: [20, 5, 5, 5],
+      // });
+      // chart.source(data, {
+      //   y: {
+      //     max: 100,
+      //     min: 0
+      //   }
+      // });
+      // chart.axis(false);
+      // chart.tooltip(false);
+      // chart.coord('polar', {
+      //   transposed: true,
+      //   innerRadius: 0.95,
+      //   radius: 0.9
+      // });
+      // chart.guide().arc({
+      //   start: [0, 0],
+      //   end: [1, 99.98],
+      //   top: false,
+      //   style: {
+      //     lineWidth: 8,
+      //     stroke: '#ccc'
+      //   }
+      // });
+      // chart.guide().text({
+      //   position: ['50%', '50%'],
+      //   content: '85%',
+      //   style: {
+      //     fontSize: fontSize,
+      //     fill: '#26C98D'
+      //   }
+      // });
+      // chart.interval().position('x*y').size(10).color('#26C98D').animate({
+      //   appear: {
+      //     duration: 1200,
+      //     easing: 'cubicIn'
+      //   }
+      // });
+      // chart.render();
+    });
+    // 1. 拿到要操作的元素
+    // let oItems = document.querySelectorAll(".peopleflow-tab-title");
+    // let oDivs = document.querySelectorAll(".peopleflow-tab-content");
+    // // 2. 定义上一次设置的索引变量
+    // let preIndex = 0;
+    // // 3. 给所有的选项卡添加点击事件
+    // for (let i = 0; i < oItems.length; i++) {
+    //   let item = oItems[i]; // i=0,
+    //   item.addEventListener('click', function () {
+    //     // 清空上一次对应的元素的样式
+    //     let preItem = oItems[preIndex]; //preIndex=0
+
+    //     preItem.className = "peopleflow-tab-title";
+    //     preItem.style.borderBottom = "0px";
+    //     oDivs[preIndex].style.display = 'none';
+
+    //     this.className = "peopleflow-tab-title current";
+    //     console.log(this)
+    //     let oDiv = oDivs[i];
+    //     oDiv.style.display = "flex";
+    //     preIndex = i;
+    //   })
+    // }
+    addDateItem();
+
+
+    function addDateItem(esdatas) {
+      var pindex = $('.peopleflow-tab-content.active').index();
+      $([1, 2]).each(function (index, item) {
+        var mycanvas = $('<canvas id="canvas-' + pindex + '-' + index + '" width="100%" height="100%"></canvas>');
+        var item = $('<div class="peopleflow-tab-dataBox">' +
+          '<div class="peopleflow-tab-dataBox-name">' +
+          '  <img src="images/libraryIcon.png" alt="">' +
+          ' <p>本部图书馆</p>' +
+          '</div>' +
+          ' <div class="peopleflow-tab-dataBox-desc">' +
+          '   <span class="peopleflow-data">534</span>' +
+          '  <p>当前人数</p>' +
+          '  </div>' +
+          ' </div>');
+
+        $(item).append(mycanvas);
+        $('.peopleflow-tab-content.active').find('.peopleflow-tab-dataBox-footer').before(item);
+        renderChart(mycanvas, null);
+      });
+      return;
+    }
+
+
+    function renderChart(cavs, chartData) {
+      var fontSize = 14 * (window.innerWidth / 375); // 字体适配不同屏幕
+
+      var data = [{
+        x: '1',
+        y: 85
+      }];
+      var chart = new F2.Chart({
+        id: $(cavs).attr('id'),
+        pixelRatio: window.devicePixelRatio,
+        padding: [12, 12, 12, 12],
+        appendPadding: [20, 5, 5, 5],
+      });
+      chart.source(data, {
+        y: {
+          max: 100,
+          min: 0
+        }
+      });
+      chart.axis(false);
+      chart.tooltip(false);
+      chart.coord('polar', {
+        transposed: true,
+        innerRadius: 0.95,
+        radius: 0.9
+      });
+      chart.guide().arc({
+        start: [0, 0],
+        end: [1, 99.98],
+        top: false,
+        style: {
+          lineWidth: 8,
+          stroke: '#ccc'
+        }
+      });
+      chart.guide().text({
+        position: ['50%', '50%'],
+        content: '85%',
+        style: {
+          fontSize: fontSize,
+          fill: '#26C98D'
+        }
+      });
+      chart.interval().position('x*y').size(10).color('#26C98D').animate({
+        appear: {
+          duration: 1200,
+          easing: 'cubicIn'
+        }
+      });
+      chart.render();
+    }
+  </script>
+</body>
+
+</html>

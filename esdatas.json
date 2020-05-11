@@ -1,0 +1,108 @@
+{
+  "data": [{
+      "title": "图书馆",
+      "icon": "http://cdn.mengdouwang.cn/datav/pflow/libraryIcon.png",
+      "content": [{
+          "name": "本部图书馆",
+          "number": "534",
+          "radio": "85%"
+        },
+        {
+          "name": "分部图书馆",
+          "number": "534",
+          "radio": "85%"
+        }
+      ]
+    },
+    {
+      "title": "浴室",
+      "icon": "http://cdn.mengdouwang.cn/datav/pflow/bathroomIcon.png",
+      "content": [{
+          "name": "北区男浴室",
+          "number": "35",
+          "radio": "85%"
+        },
+        {
+          "name": "北区女浴室",
+          "number": "180",
+          "radio": "85%"
+        },
+        {
+          "name": "南区男浴室",
+          "number": "35",
+          "radio": "85%"
+        },
+        {
+          "name": "南区女浴室",
+          "number": "90",
+          "radio": "85%"
+        }
+      ]
+    },
+    {
+      "title": "食堂",
+      "icon": "http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png",
+      "content": [{
+          "name": "一食堂",
+          "number": "1534",
+          "radio": "85%"
+        },
+        {
+          "name": "二食堂",
+          "number": "1534",
+          "radio": "85%"
+        },
+        {
+          "name": "三食堂",
+          "number": "1534",
+          "radio": "85%"
+        }
+      ]
+    },
+    {
+      "title": "教室",
+      "icon": "http://cdn.mengdouwang.cn/datav/pflow/classroomIcon.png",
+      "content": [{
+          "name": "一教",
+          "number": "35",
+          "radio": "85%"
+        },
+        {
+          "name": "二教",
+          "number": "180",
+          "radio": "85%"
+        },
+        {
+          "name": "三教",
+          "number": "35",
+          "radio": "85%"
+        },
+        {
+          "name": "四教",
+          "number": "90",
+          "radio": "85%"
+        },
+        {
+          "name": "五教",
+          "number": "90",
+          "radio": "85%"
+        }
+      ]
+    },
+    {
+      "title": "体育馆",
+      "icon": "http://cdn.mengdouwang.cn/datav/pflow/gymIcon.png",
+      "content": [{
+          "name": "活动中心",
+          "number": "600",
+          "radio": "85%"
+        },
+        {
+          "name": "健身房",
+          "number": "80",
+          "radio": "85%"
+        }
+      ]
+    }
+  ]
+}

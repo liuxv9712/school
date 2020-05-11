@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>JSAFC-公共场所人流状态分布</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.peopleflow {
+			background: url(http://cdn.mengdouwang.cn/datav/pflow/background-1.png);
+			background-size: 100% 100%;
+			margin: 0 auto;
+			position: relative;
+			overflow: hidden;
+			height: 100vh;
+		}
+
+		.peopleflow-title {
+			color: #FFFFFF;
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.peopleflow-bg-jzl img {
+			width: 100%;
+		}
+
+		.peopleflow-tab-box {
+			margin: 15px;
+			background: #ffffff;
+			border-radius: 7px;
+		}
+
+		.peopleflow-tab-top {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			list-style: none;
+			text-align: center;
+			cursor: pointer;
+			background: #F2F2F2;
+			border-radius: 7px 7px 0 0;
+			position: relative;
+			height: 45px;
+			line-height: 45px;
+		}
+
+		.peopleflow-tab-title {
+			/* padding: 0px 10px; */
+			font-size: 14px;
+			font-weight: 550;
+			color: #7A7A7A;
+			flex: 0 0 20%;
+			height: 20px;
+			line-height: 20px;
+			box-sizing: border-box;
+		}
+
+
+		.peopleflow-tab-top span {
+			color: #BEBEBE;
+			width: 1px;
+		}
+
+		.peopleflow-tab-title.current {
+			background: #ffffff;
+			color: #0A9464;
+			border-radius: 7px 7px 0 0;
+			transform: scale(1.15);
+			transform-origin: bottom;
+			font-size: 15.5px;
+			font-weight: 550;
+			/* transition: all 0.3s ease-in; */
+			height: 45px;
+			line-height: 45px;
+		}
+
+		.peopleflow-tab-title.current:first-child {
+			transform-origin: left bottom;
+		}
+
+		.peopleflow-tab-title.current:last-child {
+			transform-origin: right bottom;
+		}
+
+		.peopleflow-tab-bottom {
+			width: 100%;
+			padding: 0 15px;
+			overflow-y: auto;
+		}
+
+		.peopleflow-tab-content {
+			width: 100%;
+			height: 100%;
+			display: none;
+			flex-direction: column;
+			border-radius: 4px;
+			margin: 0 auto;
+		}
+
+		.peopleflow-tab-content.active {
+			display: block;
+		}
+
+
+		.peopleflow-tab-subtitle {
+			display: flex;
+			justify-content: space-between;
+			line-height: 50px;
+			height: 50px;
+		}
+
+		.peopleflow-tab-subtitle h2 {
+			font-size: 14px;
+			color: #7A7A7A;
+		}
+
+		.peopleflow-tab-subtitle p {
+			font-size: 12px;
+			color: #A3A3A3;
+		}
+
+		.peopleflow-tab-dataBox-warp {
+			/* margin-bottom: 55px; */
+		}
+
+		.peopleflow-tab-dataBox {
+			display: flex;
+			justify-content: space-between;
+			background: #F7F6F8;
+			border-radius: 5px;
+			box-shadow: 0 8px 10px rgba(49, 70, 89, .08);
+			margin-bottom: 20px;
+		}
+
+		.peopleflow-tab-dataBox-desc {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.peopleflow-data {
+			font-size: 30px;
+			font-weight: 600;
+			color: #282828;
+		}
+
+		.peopleflow-tab-dataBox-desc p {
+			font-size: 12px;
+			font-weight: 550;
+			color: #B2B2B2;
+		}
+
+		.peopleflow-tab-dataBox-footer {
+			text-align: center;
+		}
+
+		.peopleflow-tab-dataBox-footer img {
+			width: calc(100% - 30px);
+			max-height: 185px;
+		}
+
+		.peopleflow-tab-dataBox-name {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			border-radius: 5px;
+			color: #ffffff;
+			font-size: 16px;
+			padding: 15px;
+			background: linear-gradient(135deg, #26C98D 40%, #3F96A1);
+		}
+
+		.peopleflow-tab-dataBox-name img {
+			width: 44px;
+			height: 44px;
+		}
+
+		.peopleflow-tab-dataBox-name p {
+			margin-top: 10px;
+			font-size: 13px;
+			color: #FFFFFF;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="peopleflow">
+		<div class="peopleflow-title">
+			<h3>江苏农林职业技术学院</h3>
+			<h3 style="letter-spacing: 10px;">公共场所人流状态分布</h3>
+		</div>
+		<div class="peopleflow-bg-jzl">
+			<img src="http://cdn.mengdouwang.cn/datav/pflow/background-jxl.png" />
+		</div>
+
+		<div class="peopleflow-tab-box">
+			<ul class="peopleflow-tab-top">
+				<li class="peopleflow-tab-title current">图书馆</li>
+				<li class="peopleflow-tab-title">浴室</li>
+				<li class="peopleflow-tab-title">食堂</li>
+				<li class="peopleflow-tab-title">教室</li>
+				<li class="peopleflow-tab-title">体育馆</li>
+			</ul>
+
+			<div class="peopleflow-tab-bottom">
+				<div class="peopleflow-tab-content active">
+					<div class="peopleflow-tab-subtitle">
+						<h2>图书馆当前人数态势</h2>
+						<p>2020/05/06 21:07:55</p>
+					</div>
+					<div class="peopleflow-tab-dataBox-warp">
+
+					</div>
+					<!-- <div class="peopleflow-tab-dataBox">
+							<div class="peopleflow-tab-dataBox-name">
+							  <img src="images/libraryIcon.png" alt="">
+							  <span>分部图书馆</span>
+							</div>
+							<div class="peopleflow-tab-dataBox-desc">
+							  <span class="peopleflow-data">534</span>
+							  <p>当前人数</p>
+							</div>
+							<div>图图图图图图图</div>
+						  </div> -->
+					<div class="peopleflow-tab-dataBox-footer">
+						<img src="http://cdn.mengdouwang.cn/datav/pflow/libraryFooter.png" alt="">
+					</div>
+				</div>
+				<div class="peopleflow-tab-content">
+					<div class="peopleflow-tab-subtitle">
+						<h2>浴室当前人数态势</h2>
+						<p>2020/05/06 21:07:55</p>
+					</div>
+					<div class="peopleflow-tab-dataBox-warp">
+
+					</div>
+					<!-- <div class="peopleflow-tab-dataBox">
+							<div class="peopleflow-tab-dataBox-name">
+								<img src="http://cdn.mengdouwang.cn/datav/pflow/bathroomIcon.png" alt="">
+								<span>本部图书馆</span>
+							</div>
+							<div class="peopleflow-tab-dataBox-desc">
+								<span class="peopleflow-data">534</span>
+								<p>当前人数</p>
+							</div>
+							<div>图图图图图图图</div>
+						</div> -->
+					<div class="peopleflow-tab-dataBox-footer">
+						<img src="http://cdn.mengdouwang.cn/datav/pflow/bathroomFooter.png" alt="">
+					</div>
+				</div>
+				<div class="peopleflow-tab-content">
+					<div class="peopleflow-tab-subtitle">
+						<h2>食堂当前人数态势</h2>
+						<p>2020/05/06 21:07:55</p>
+					</div>
+					<div class="peopleflow-tab-dataBox-warp">
+
+					</div>
+					<!-- <div class="peopleflow-tab-dataBox">
+							<div class="peopleflow-tab-dataBox-name">
+								<img src="http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png" alt="">
+								<span>本部图书馆</span>
+							</div>
+							<div class="peopleflow-tab-dataBox-desc">
+								<span class="peopleflow-data">534</span>
+								<p>当前人数</p>
+							</div>
+							<div>图图图图图图图</div>
+						</div> -->
+					<div class="peopleflow-tab-dataBox-footer">
+						<img src="http://cdn.mengdouwang.cn/datav/pflow/canteenFooter.png" alt="">
+					</div>
+				</div>
+				<div class="peopleflow-tab-content">
+					<div class="peopleflow-tab-subtitle">
+						<h2>教室当前人数态势</h2>
+						<p>2020/05/06 21:07:55</p>
+					</div>
+					<div class="peopleflow-tab-dataBox-warp">
+
+					</div>
+					<!-- <div class="peopleflow-tab-dataBox">
+							<div class="peopleflow-tab-dataBox-name">
+								<img src="http://cdn.mengdouwang.cn/datav/pflow/classroomIcon.png" alt="">
+								<span>本部图书馆</span>
+							</div>
+							<div class="peopleflow-tab-dataBox-desc">
+								<span class="peopleflow-data">534</span>
+								<p>当前人数</p>
+							</div>
+							<div>图图图图图图图</div>
+						</div> -->
+					<div class="peopleflow-tab-dataBox-footer">
+						<img src="http://cdn.mengdouwang.cn/datav/pflow/classroomFooter.png" alt="">
+					</div>
+				</div>
+				<div class="peopleflow-tab-content">
+					<div class="peopleflow-tab-subtitle">
+						<h2>体育馆当前人数态势</h2>
+						<p>2020/05/06 21:07:55</p>
+					</div>
+					<div class="peopleflow-tab-dataBox-warp">
+
+					</div>
+					<!-- <div class="peopleflow-tab-dataBox">
+							<div class="peopleflow-tab-dataBox-name">
+								<img src="http://cdn.mengdouwang.cn/datav/pflow/gymIcon.png" alt="">
+								<span>本部图书馆</span>
+							</div>
+							<div class="peopleflow-tab-dataBox-desc">
+								<span class="peopleflow-data">534</span>
+								<p>当前人数</p>
+							</div>
+							<div>图图图图图图图</div>
+						</div> -->
+					<div class="peopleflow-tab-dataBox-footer">
+						<img src="http://cdn.mengdouwang.cn/datav/pflow/gymFooter.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+		// 测试数据，真实使用的时候需要跟平台对接
+		const dataset = [
+			[{
+					title: '上理图书馆',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/libraryIcon.png',
+					nums: 534,
+					percent: 85
+				},
+				{
+					title: '第一图书馆',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/libraryIcon.png',
+					nums: 345,
+					percent: 62
+				}
+			],
+			[{
+					title: '北区男浴室',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/bathroomIcon.png',
+					nums: 54,
+					percent: 85
+				},
+				{
+					title: '北区女浴室',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/bathroomIcon.png',
+					nums: 23,
+					percent: 62
+				},
+				{
+					title: '南区女浴室',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/bathroomIcon.png',
+					nums: 12,
+					percent: 22
+				}
+			],
+			[{
+					title: '一食堂',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png',
+					nums: 54,
+					percent: 85
+				},
+				{
+					title: '二食堂',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png',
+					nums: 23,
+					percent: 62
+				},
+				{
+					title: '三食堂',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png',
+					nums: 12,
+					percent: 22
+				},
+				{
+					title: '四食堂',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png',
+					nums: 12,
+					percent: 22
+				},
+				{
+					title: '五食堂',
+					icon: 'http://cdn.mengdouwang.cn/datav/pflow/canteenIcon.png',
+					nums: 12,
+					percent: 22
+				}
+			],
+		]
+
+		//动态设置 tab content 的高度
+		var tabHeight = $(document.body).height() - $('.peopleflow-title').height() - $('.peopleflow-bg-jzl').height() - 20 -
+			30 - 45;
+		$('.peopleflow-tab-bottom').css('height', tabHeight + 'px');
+
+		// ant f2
+		$.getScript('https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js', function () {
+			// 初始化
+			addDateItem(dataset[0]);
+
+			// tab 页切换
+			$('.peopleflow-tab-title').on('click', function () {
+				const index = $(".peopleflow-tab-title").index($(this));
+
+				if (!$(this).hasClass('current')) {
+					// tab页面边框设置,原来激活的删除类名，给现在激活的添加类名
+					$('.peopleflow-tab-content.active').removeClass('active');
+					$($('.peopleflow-tab-content')[index]).addClass('active');
+
+					$(this).siblings().removeClass('current');
+					$(this).addClass('current');
+
+					// 没有数据的是才去加载
+					if ($('.peopleflow-tab-content.active .peopleflow-tab-dataBox').length == 0) {
+						addDateItem(dataset[index]);
+					}
+				}
+			});
+		});
+
+		// 添加数据
+		function addDateItem(esdatas) {
+			var pindex = $('.peopleflow-tab-content.active').index();
+			$(esdatas).each(function (index, data) {
+				var mycanvas = $('<canvas id="canvas-' + pindex + '-' + index + '" width="100%" height="100%"></canvas>');
+				var item = $('<div class="peopleflow-tab-dataBox">' +
+					'<div class="peopleflow-tab-dataBox-name">' +
+					'  <img src="http://cdn.mengdouwang.cn/datav/pflow/libraryIcon.png" alt="">' +
+					' <p>' + data.title + '</p>' +
+					'</div>' +
+					' <div class="peopleflow-tab-dataBox-desc">' +
+					'   <span class="peopleflow-data">' + data.nums + '</span>' +
+					'  <p>当前人数</p>' +
+					'  </div>' +
+					' </div>');
+
+				$(item).append(mycanvas);
+				$('.peopleflow-tab-content.active').find('.peopleflow-tab-dataBox-warp').append(item);
+				renderChart(mycanvas, data.percent);
+			});
+			return;
+		}
+
+
+		function renderChart(cavs, chartData) {
+			var fontSize = 14 * (window.innerWidth / 375); // 字体适配不同屏幕
+			var data = [{
+				x: '1',
+				y: chartData
+			}];
+			var chart = new F2.Chart({
+				id: $(cavs).attr('id'),
+				pixelRatio: window.devicePixelRatio,
+				padding: [18, 18, 18, 18],
+				appendPadding: [20, 5, 5, 5],
+			});
+			chart.source(data, {
+				y: {
+					max: 100,
+					min: 0
+				}
+			});
+			chart.axis(false);
+			chart.tooltip(false);
+			chart.coord('polar', {
+				transposed: true,
+				innerRadius: 0.95,
+				radius: 0.9
+			});
+			chart.guide().arc({
+				start: [0, 0],
+				end: [1, 99.98],
+				top: false,
+				style: {
+					lineWidth: 8,
+					stroke: '#ccc'
+				}
+			});
+			chart.guide().text({
+				position: ['50%', '50%'],
+				content: chartData + '%',
+				style: {
+					fontSize: fontSize,
+					fill: '#26C98D'
+				}
+			});
+			chart.interval().position('x*y').size(10).color('#26C98D').animate({
+				appear: {
+					duration: 1200,
+					easing: 'cubicIn'
+				}
+			});
+			chart.render();
+		}
+	</script>
+</body>
+
+</html>
